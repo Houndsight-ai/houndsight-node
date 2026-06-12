@@ -1,0 +1,58 @@
+{
+  "name": "houndsight",
+  "version": "0.1.0",
+  "description": "Official TypeScript/Node SDK for Houndsight \u2014 AI agent governance: tracing (trails/sniffs), synchronous policy gating (leash), and bypass-detectable audit instrumentation.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/houndsight/houndsight-node.git"
+  },
+  "homepage": "https://houndsight.ai",
+  "keywords": [
+    "ai",
+    "agents",
+    "governance",
+    "observability",
+    "tracing",
+    "human-in-the-loop",
+    "llm"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types && node scripts/fixup-cjs.mjs",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
